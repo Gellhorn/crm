@@ -20,6 +20,7 @@ spring:
     charset: UTF-8
     template-loader-path: classpath:/views/
 
+
   ## 启用热部署
   devtools:
     restart:

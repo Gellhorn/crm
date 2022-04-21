@@ -1,16 +1,14 @@
 package com.xxxx.crm.controller;
 
 
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
+import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
 import com.xxxx.crm.exceptions.ParamsException;
 import com.xxxx.crm.model.UserModel;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
-import com.xxxx.crm.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("user/")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     UserService userService;
 
@@ -76,6 +74,6 @@ public class UserController {
     @RequestMapping("toPasswordPage")
     public String toPasswordPage() {
 
-        return "password";
+        return "user/password";
     }
 }
