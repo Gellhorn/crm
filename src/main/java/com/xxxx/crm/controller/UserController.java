@@ -7,6 +7,7 @@ import com.xxxx.crm.exceptions.ParamsException;
 import com.xxxx.crm.model.UserModel;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
+import com.xxxx.crm.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -71,5 +72,10 @@ public class UserController {
         }
 
         return resultInfo;
+    }
+    @RequestMapping("toPasswordPage")
+    public String toPasswordPage() {
+
+        return "password";
     }
 }
