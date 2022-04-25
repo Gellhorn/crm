@@ -40,6 +40,15 @@ public class IndexController extends BaseController {
     @RequestMapping("main")
     public String main(HttpServletRequest request){
       Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
+      if(userId == 0) {
+          try {
+              throw new Exception("未登录");
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+
+      }
+
       request.setAttribute("user",userService.selectByPrimaryKey(userId));
       return "main";
     }
