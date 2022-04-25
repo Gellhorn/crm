@@ -32,18 +32,13 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResultInfo login(String userName,String userPwd){
         ResultInfo resultInfo = new ResultInfo();
-        try {
-            UserModel userModel =  userService.userLogin(userName,userPwd);
-            resultInfo.setResult(userModel);
-        } catch (ParamsException e) {
-            e.printStackTrace();
-            resultInfo.setCode(e.getCode());
-            resultInfo.setMsg(e.getMsg());
-        } catch(Exception e){
-            e.printStackTrace();
-            resultInfo.setCode(500);
-            resultInfo.setMsg("操作失败");
-        }
+
+        UserModel userModel =  userService.userLogin(userName,userPwd);
+        resultInfo.setResult(userModel);
+
+
+
+
         return resultInfo;
     }
     @PostMapping("updatePwd")
@@ -54,27 +49,18 @@ public class UserController extends BaseController {
 
 
 
-       try {
+
             // 获取cookie中的userId
             Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
             // 调用Service层修改密码方法
             userService.updatePassWord(userId, oldPassword, newPassword, repeatPassword);
 
-        } catch (ParamsException p) {
-            resultInfo.setCode(p.getCode());
-            resultInfo.setMsg(p.getMsg());
-            p.printStackTrace();
-        } catch (Exception e) {
-            resultInfo.setCode(500);
-            resultInfo.setMsg("修改密码失败！");
-            e.printStackTrace();
-        }
+
 
         return resultInfo;
     }
     @RequestMapping("toPasswordPage")
     public String toPasswordPage() {
-
         return "user/password";
     }
 }

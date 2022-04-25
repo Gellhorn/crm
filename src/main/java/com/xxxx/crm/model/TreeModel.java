@@ -1,9 +1,7 @@
 package com.xxxx.crm.model;
 
-/**
- * 乐字节：专注线上IT培训
- * 答疑老师微信：lezijie
- */
+
+
 public class TreeModel {
 
     private Integer id;
