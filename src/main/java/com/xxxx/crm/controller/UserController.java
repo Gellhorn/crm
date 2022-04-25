@@ -45,7 +45,8 @@ public class UserController extends BaseController {
             resultInfo.setMsg("操作失败");
         }
         return resultInfo;
-    } @PostMapping("updatePwd")
+    }
+    @PostMapping("updatePwd")
     @ResponseBody
     public ResultInfo updateUserPassword(HttpServletRequest request,
                                          String oldPassword, String newPassword, String repeatPassword) {
