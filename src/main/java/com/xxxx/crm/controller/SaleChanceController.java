@@ -19,7 +19,10 @@ public class SaleChanceController extends BaseController {
     @Resource
     private SaleChanceService saleChanceService;
 
-
+    @RequestMapping("index")
+    public String index(){
+        return "saleChance/sale_chance";
+    }
     /***
      * 营销机会数据查询（分页多条件查询） 101001
      *  如果flag的值不为空，且值为1，则表示当前查询的是客户开发计划；否则查询营销机会数据
