@@ -1,7 +1,5 @@
 package com.xxxx.crm.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class SaleChance {
@@ -25,7 +23,6 @@ public class SaleChance {
 
     private String assignMan;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date assignTime;
 
     private Integer state;
@@ -34,14 +31,9 @@ public class SaleChance {
 
     private Integer isValid;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
-
-    // 分配人
-    private String uname;
 
     public Integer getId() {
         return id;
@@ -169,13 +161,5 @@ public class SaleChance {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
     }
 }
