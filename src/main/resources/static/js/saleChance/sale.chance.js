@@ -130,7 +130,7 @@ layui.use(['table','layer'],function(){
             type : 2,
             area:["700px","560px"],
             maxmin:true,
-            content : url
+            content:url
         });
     }
 
