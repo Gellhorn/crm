@@ -84,7 +84,7 @@
                     // 如果循环得到的ID与隐藏域的ID相等，则表示被选中
                     if (assignManId == data[i].id) {
                         // 设置下拉选项  设置下拉选项选中  value=“id” 本身是字符串要将id 和 双引号拼接起来 所以要加上双引号
-                        //里面的双引号表示 里面是一个字符串=
+                        //里面的双引号表示 里面是一个字符串
                         opt = "<option value='"+data[i].id+"' selected>"+data[i].uname+"</option>";
                     } else {
                         // 设置下拉选项

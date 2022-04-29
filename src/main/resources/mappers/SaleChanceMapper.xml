@@ -252,4 +252,16 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="deleteBatch">
+    update
+    t_sale_chance
+    set
+    is_valid = 0
+    where
+    id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="id">
+      #{id}
+    </foreach>
+  </update>
 </mapper>
