@@ -152,4 +152,8 @@ public class UserService extends BaseService<User, Integer> {
         AssertUtil.isTrue(!newPwd.equals(repeatPwd), "确认密码与新密码不一致！");
 
     }
+    public List<Map<String,Object>> queryAllSales(){
+        return userMapper.queryAllSales();
+    }
+
 }
