@@ -2,6 +2,7 @@ package com.xxxx.crm.controller;
 
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
+import com.xxxx.crm.enums.StateStatus;
 import com.xxxx.crm.query.SaleChanceQuery;
 import com.xxxx.crm.service.SaleChanceService;
 import com.xxxx.crm.service.UserService;
@@ -44,7 +45,16 @@ public class SaleChanceController extends BaseController {
     @ResponseBody
     public Map<String, Object> querySaleChanceByParams(SaleChanceQuery saleChanceQuery,
                                                        Integer flag, HttpServletRequest request) {
-
+        // 判断flag的值
+        if (flag != null && flag == 1) {
+            // 查询客户开发计划
+            // 设置分配状态
+            saleChanceQuery.setState(StateStatus.STATED.getType());
+            // 设置指派人（当前登录用户的ID）
+            // 从cookie中获取当前登录用户的ID
+            Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
+            saleChanceQuery.setAssignMan(userId);
+        }
 
         return saleChanceService.querySaleChanceByParams(saleChanceQuery);
     }
