@@ -40,7 +40,7 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
      * @param cusDevPlanQuery
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
-    public Map<String, Object> queryCUsDevPlanByParams(CusDevPlanQuery cusDevPlanQuery) {
+    public Map<String, Object> queryCusDevPlanByParams(CusDevPlanQuery cusDevPlanQuery) {
 
         Map<String, Object> map = new HashMap<>();
 

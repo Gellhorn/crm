@@ -208,7 +208,7 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
                 // 开发状态    1=开发中
                 saleChance.setDevResult(DevResult.DEVING.getStatus());
             }
-        } else { // 原始数据不存在
+        } else { // 存在
             // 判断修改后的值是否存在
             if (StringUtils.isBlank(saleChance.getAssignMan())) { // 修改前有值，修改后无值
                 // assignTime指派时间  设置为null
@@ -221,10 +221,14 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
                 // 判断修改前后是否是同一个用户
                 if (!saleChance.getAssignMan().equals(originSaleChance.getAssignMan())) {
                     // 更新指派时间
+
                     saleChance.setAssignTime(new Date());
                 } else {
                     // 设置指派时间为修改前的时间
-                    saleChance.setAssignTime(originSaleChance.getAssignTime());
+                    saleChance.setState(StateStatus.STATED.getType());
+                    // 开发状态    1=开发中
+//                    saleChance.setDevResult(DevResult.DEVING.getStatus());
+//                    saleChance.setAssignTime(originSaleChance.getAssignTime());
                 }
             }
         }

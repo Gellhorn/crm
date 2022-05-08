@@ -15,4 +15,5 @@ public interface CusDevPlanMapper extends BaseMapper<CusDevPlan,Integer> {
     Integer updateByPrimaryKeySelective(CusDevPlan record);
 
     Integer updateByPrimaryKey(CusDevPlan record);
+
 }

@@ -64,7 +64,7 @@ public class CusDevPlanController extends BaseController {
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> queryCusDevPlanByParams(CusDevPlanQuery cusDevPlanQuery) {
-        return cusDevPlanService.queryCUsDevPlanByParams(cusDevPlanQuery);
+        return cusDevPlanService.queryCusDevPlanByParams(cusDevPlanQuery);
     }
 
     /**

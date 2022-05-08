@@ -20,6 +20,12 @@
     from t_cus_dev_plan
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByParams" resultMap="BaseResultMap" parameterType="com.xxxx.crm.query.CusDevPlanQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from t_cus_dev_plan
+    where is_valid = 1 and sale_chance_id = #{saleChanceId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_cus_dev_plan
     where id = #{id,jdbcType=INTEGER}
