@@ -33,12 +33,10 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
 
     /**
      * 多条件分页查询客户开发计划 （返回的数据格式必须满足LayUi中数据表格要求的格式）
-     *
-     *
-     * 乐字节：专注线上IT培训
-     * 答疑老师微信：lezijie
+
+
      * @param cusDevPlanQuery
-     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      */
     public Map<String, Object> queryCusDevPlanByParams(CusDevPlanQuery cusDevPlanQuery) {
 
@@ -50,11 +48,11 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
         PageInfo<CusDevPlan> pageInfo = new PageInfo<>(cusDevPlanMapper.selectByParams(cusDevPlanQuery));
 
         // 设置map对象
-        map.put("code",0);
-        map.put("msg","success");
-        map.put("count",pageInfo.getTotal());
+        map.put("code", 0);
+        map.put("msg", "success");
+        map.put("count", pageInfo.getTotal());
         // 设置分页好的列表
-        map.put("data",pageInfo.getList());
+        map.put("data", pageInfo.getList());
 
         return map;
     }
@@ -72,8 +70,7 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
      *      修改时间    系统当前时间
      *  3. 执行添加操作，判断受影响的行数
      *
-     * 乐字节：专注线上IT培训
-     * 答疑老师微信：lezijie
+
      * @param cusDevPlan
      * @return void
      */
@@ -96,23 +93,24 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
 
     /**
      * 更新客户开发计划项数据
-     *  1. 参数校验
-     *      计划项ID     非空，数据存在
-     *      营销机会ID   非空，数据存在
-     *      计划项内容   非空
-     *      计划时间     非空
-     *  2. 设置参数的默认值
-     *      修改时间    系统当前时间
-     *  3. 执行更新操作，判断受影响的行数
-     *
-     *
+     * 1. 参数校验
+     * 计划项ID     非空，数据存在
+     * 营销机会ID   非空，数据存在
+     * 计划项内容   非空
+     * 计划时间     非空
+     * 2. 设置参数的默认值
+     * 修改时间    系统当前时间
+     * 3. 执行更新操作，判断受影响的行数
+     * <p>
+     * <p>
      * 乐字节：专注线上IT培训
      * 答疑老师微信：lezijie
+     *
      * @param cusDevPlan
      * @return void
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public void updateCusDevPlan(CusDevPlan cusDevPlan){
+    public void updateCusDevPlan(CusDevPlan cusDevPlan) {
         /* 1. 参数校验  */
         // 计划项ID     非空，数据存在
         AssertUtil.isTrue(null == cusDevPlan.getId()
@@ -129,21 +127,21 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
     }
 
     /**
-     *  参数校验
-     *      营销机会ID   非空，数据存在
-     *      计划项内容   非空
-     *      计划时间     非空
+     * 参数校验
+     * 营销机会ID   非空，数据存在
+     * 计划项内容   非空
+     * 计划时间     非空
+     * <p>
+     * <p>
+
      *
-     *
-     * 乐字节：专注线上IT培训
-     * 答疑老师微信：lezijie
      * @param cusDevPlan
      * @return void
      */
     private void checkCusDevPlanParams(CusDevPlan cusDevPlan) {
         // 营销机会ID   非空，数据存在
         Integer sId = cusDevPlan.getSaleChanceId();
-        AssertUtil.isTrue(null == sId || saleChanceMapper.selectByPrimaryKey(sId) == null,"数据异常，请重试！");
+        AssertUtil.isTrue(null == sId || saleChanceMapper.selectByPrimaryKey(sId) == null, "数据异常，请重试！");
 
         // 计划项内容   非空
         AssertUtil.isTrue(StringUtils.isBlank(cusDevPlan.getPlanItem()), "计划项内容不能为空！");
@@ -161,8 +159,6 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
      *  3. 执行更新操作
      *
      *
-     * 乐字节：专注线上IT培训
-     * 答疑老师微信：lezijie
      * @param id
      * @return void
      */

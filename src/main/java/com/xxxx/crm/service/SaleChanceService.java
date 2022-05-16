@@ -227,8 +227,9 @@ public class SaleChanceService extends BaseService<SaleChance, Integer> {
                     // 设置指派时间为修改前的时间
                     saleChance.setState(StateStatus.STATED.getType());
                     // 开发状态    1=开发中
-//                    saleChance.setDevResult(DevResult.DEVING.getStatus());
-//                    saleChance.setAssignTime(originSaleChance.getAssignTime());
+                    saleChance.setDevResult(DevResult.DEVING.getStatus());
+
+                    saleChance.setAssignTime(originSaleChance.getAssignTime());
                 }
             }
         }
