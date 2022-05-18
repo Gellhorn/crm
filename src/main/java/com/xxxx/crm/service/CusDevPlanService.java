@@ -52,7 +52,7 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
         map.put("msg", "success");
         map.put("count", pageInfo.getTotal());
         // 设置分页好的列表
-        map.put("data", pageInfo.getList());
+        map.put("data",pageInfo.getList());
 
         return map;
     }
@@ -118,7 +118,7 @@ public class CusDevPlanService extends BaseService<CusDevPlan, Integer> {
         checkCusDevPlanParams(cusDevPlan);
 
         /* 2. 设置参数的默认值 */
-        // 修改时间    系统当前时间
+        // 修改时间    系统当前  时间
         cusDevPlan.setUpdateDate(new Date());
 
         /* 3. 执行更新操作，判断受影响的行数 */

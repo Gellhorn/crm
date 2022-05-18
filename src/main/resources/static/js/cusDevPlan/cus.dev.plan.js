@@ -14,7 +14,7 @@ layui.use(['table','layer'],function(){
         ,height: 'full-125'
         // 单元格最小的宽度
         ,cellMinWidth:95
-        // 访问数据的URL（后台的数据接口） 设置flag参数，表示查询的事客户开发计划数据
+        // 访问数据的URL（后台的数据接口） 设置flag参数，表示查询的是客户开发计划数据
         ,url: ctx + '/sale_chance/list?flag=1'
         // 开启分页
         ,page: true
