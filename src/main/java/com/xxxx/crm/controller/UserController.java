@@ -5,6 +5,7 @@ import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
 import com.xxxx.crm.exceptions.ParamsException;
 import com.xxxx.crm.model.UserModel;
+import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +72,22 @@ public class UserController extends BaseController {
     public List<Map<String,Object>> queryAllSales(){
         return userService.queryAllSales();
     }
-
+    /**
+     * 分页多条件查询用户列表
+     *
+     *
+     neil
+     * crm
+     * @param userQuery
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    @RequestMapping("list")
+    @ResponseBody
+    public Map<String,Object> selectByParams(UserQuery userQuery) {
+        return userService.queryByParamsForTable(userQuery);
+    }
+    @RequestMapping("index")
+    public String index(){
+        return "user/user";
+    }
 }

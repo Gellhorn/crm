@@ -17,12 +17,17 @@ package com.xxxx.crm.service;
 //import org.springframework.transaction.annotation.Transactional;
 //import javax.annotation.Resource;
 //import java.util.ArrayList;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xxxx.crm.base.BaseService;
 import com.xxxx.crm.dao.UserMapper;
 import com.xxxx.crm.model.UserModel;
+import com.xxxx.crm.query.SaleChanceQuery;
+import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.utils.AssertUtil;
 import com.xxxx.crm.utils.Md5Util;
 import com.xxxx.crm.utils.UserIDBase64;
+import com.xxxx.crm.vo.SaleChance;
 import com.xxxx.crm.vo.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -32,6 +37,7 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -155,5 +161,30 @@ public class UserService extends BaseService<User, Integer> {
     public List<Map<String,Object>> queryAllSales(){
         return userMapper.queryAllSales();
     }
+
+    /**
+     * 多条件分页查询用户信息（返回的数据格式必须满足LayUi中数据表格要求的格式）
+     *
+     * @param userQuery
+     * @return java.util.Map<java.lang.String, java.lang.Object>
+     */
+//    public Map<String, Object> queryUserByParams(UserQuery userQuery) {
+//
+//        Map<String, Object> map = new HashMap<>();
+//
+//        // 开启分页
+//        PageHelper.startPage(userQuery.getPage(), userQuery.getLimit());
+//        // 得到对应分页对象`
+//        PageInfo<User> pageInfo = new PageInfo<User>(userMapper.selectByParams(userQuery));
+//
+//        // 设置map对象
+//        map.put("code", 0);
+//        map.put("msg", "success");
+//        map.put("count", pageInfo.getTotal());
+//        // 设置分页好的列表
+//        map.put("data", pageInfo.getList());
+//
+//        return map;
+//    }
 
 }
