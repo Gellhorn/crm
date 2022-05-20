@@ -26,6 +26,7 @@ import com.xxxx.crm.query.SaleChanceQuery;
 import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.utils.AssertUtil;
 import com.xxxx.crm.utils.Md5Util;
+import com.xxxx.crm.utils.PhoneUtil;
 import com.xxxx.crm.utils.UserIDBase64;
 import com.xxxx.crm.vo.SaleChance;
 import com.xxxx.crm.vo.User;
@@ -163,28 +164,70 @@ public class UserService extends BaseService<User, Integer> {
     }
 
     /**
-     * 多条件分页查询用户信息（返回的数据格式必须满足LayUi中数据表格要求的格式）
+     * 添加用户
      *
-     * @param userQuery
-     * @return java.util.Map<java.lang.String, java.lang.Object>
+     * @param user
      */
-//    public Map<String, Object> queryUserByParams(UserQuery userQuery) {
-//
-//        Map<String, Object> map = new HashMap<>();
-//
-//        // 开启分页
-//        PageHelper.startPage(userQuery.getPage(), userQuery.getLimit());
-//        // 得到对应分页对象`
-//        PageInfo<User> pageInfo = new PageInfo<User>(userMapper.selectByParams(userQuery));
-//
-//        // 设置map对象
-//        map.put("code", 0);
-//        map.put("msg", "success");
-//        map.put("count", pageInfo.getTotal());
-//        // 设置分页好的列表
-//        map.put("data", pageInfo.getList());
-//
-//        return map;
-//    }
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void addUser(User user) {
+        /* 1. 参数校验 */
+        checkUserParams(user.getUserName(), user.getEmail(), user.getPhone(), null);
+
+        /* 2. 设置参数的默认值 */
+        user.setIsValid(1);
+        user.setCreateDate(new Date());
+        user.setUpdateDate(new Date());
+        // 设置默认密码
+        user.setUserPwd(Md5Util.encode("123456"));
+
+        /* 3. 执行添加操作，判断受影响的行数 */
+        AssertUtil.isTrue(userMapper.insertSelective(user) < 1, "用户添加失败！");
+
+        /* 用户角色关联 */
+        /**
+         * 用户ID
+         *  userId
+         * 角色ID
+         *  roleIds
+         */
+
+
+    }
+
+    /**
+     *  参数校验
+     *        用户名userName     非空，唯一性
+     *        邮箱email          非空
+     *        手机号phone        非空，格式正确
+     *
+     *
+     neil
+     * crm
+     * @param userName
+     * @param email
+     * @param phone
+     * @return void
+     */
+    private void checkUserParams(String userName, String email, String phone, Integer userId) {
+        // 判断用户名是否为空
+        AssertUtil.isTrue(StringUtils.isBlank(userName), "用户名不能为空！");
+        // 判断用户名的唯一性
+        // 通过用户名查询用户对象
+        User temp = userMapper.queryUserByName(userName);
+        // 如果用户对象为空，则表示用户名可用；如果用户对象不为空，则表示用户名不可用
+        // 如果是添加操作，数据库中无数据，只要通过名称查到数据，则表示用户名被占用
+        // 如果是修改操作，数据库中有对应的记录，通过用户名查到数据，可能是当前记录本身，也可能是别的记录
+        // 如果用户名存在，且与当前修改记录不是同一个，则表示其他记录占用了该用户名，不可用
+        AssertUtil.isTrue(null != temp && !(temp.getId().equals(userId)), "用户名已存在，请重新输入！");
+
+        // 邮箱 非空
+        AssertUtil.isTrue(StringUtils.isBlank(email), "用户邮箱不能为空！");
+
+        // 手机号 非空
+        AssertUtil.isTrue(StringUtils.isBlank(phone), "用户手机号不能为空！");
+
+        // 手机号 格式判断
+        AssertUtil.isTrue(!PhoneUtil.isMobile(phone), "手机号格式不正确！");
+    }
 
 }
