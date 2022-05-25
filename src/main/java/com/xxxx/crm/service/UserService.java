@@ -181,7 +181,7 @@ public class UserService extends BaseService<User, Integer> {
         user.setUserPwd(Md5Util.encode("123456"));
 
         /* 3. 执行添加操作，判断受影响的行数 */
-        AssertUtil.isTrue(userMapper.insertSelective(user) < 1, "用户添加失败！");
+        AssertUtil.isTrue(userMapper.insertSelective(user) < 1, "用户添加失败!");
 
         /* 用户角色关联 */
         /**
@@ -229,5 +229,75 @@ public class UserService extends BaseService<User, Integer> {
         // 手机号 格式判断
         AssertUtil.isTrue(!PhoneUtil.isMobile(phone), "手机号格式不正确！");
     }
+    /**
+     * 更新用户
+     *  1. 参数校验
+     *      判断用户ID是否为空，且数据存在
+     *      用户名userName     非空，唯一性
+     *      邮箱email          非空
+     *      手机号phone        非空，格式正确
+     *  2. 设置参数的默认值
+     *      updateDate        系统当前时间
+     *  3. 执行更新操作，判断受影响的行数
+     *
+     *
+     neil
+     * crm
+     * @param user
+     * @return void
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void updateUser(User user) {
+        // 判断用户ID是否为空，且数据存在
+        AssertUtil.isTrue(null == user.getId(), "待更新记录不存在！");
+        // 通过id查询数据
+        User temp = userMapper.selectByPrimaryKey(user.getId());
+        // 判断是否存在
+        AssertUtil.isTrue(null == temp, "待更新记录不存在！");
+        // 参数校验
+        checkUserParams(user.getUserName(), user.getEmail(),user.getPhone(), user.getId());
 
+        // 设置默认值
+        user.setUpdateDate(new Date());
+
+        // 执行更新操作，判断受影响的行数
+        AssertUtil.isTrue(userMapper.updateByPrimaryKeySelective(user) != 1, "用户更新失败！");
+
+
+//        /* 用户角色关联 */
+//        /**
+//         * 用户ID
+//         *  userId
+//         * 角色ID
+//         *  roleIds
+//         */
+//        relationUserRole(user.getId(), user.getRoleIds());
+
+    }    /**
+     * 用户删除
+     *
+     *
+     neil
+     * crm
+     * @param ids
+     * @return void
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteByIds(Integer[] ids) {
+        // 判断ids是否为空，长度是否大于0
+        AssertUtil.isTrue(ids == null || ids.length == 0, "待删除记录不存在！");
+        // 执行删除操作，判断受影响的行数
+        AssertUtil.isTrue(userMapper.deleteBatch(ids) != ids.length, "用户删除失败！");
+
+        // 遍历用户ID的数组
+//        for (Integer userId : ids) {
+//            // 通过用户ID查询对应的用户角色记录
+//            Integer count  = userRoleMapper.countUserRoleByUserId(userId);
+//            // 判断用户角色记录是否存在
+//            if (count > 0) {
+//                //  通过用户ID删除对应的用户角色记录
+//                AssertUtil.isTrue(userRoleMapper.deleteUserRoleByUserId(userId) != count, "删除用户失败！");
+//            }
+//        }
+    }
 }

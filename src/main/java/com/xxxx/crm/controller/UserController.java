@@ -8,6 +8,7 @@ import com.xxxx.crm.model.UserModel;
 import com.xxxx.crm.query.UserQuery;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.LoginUserUtil;
+import com.xxxx.crm.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,5 +92,52 @@ public class UserController extends BaseController {
         return "user/user";
     }
 //    @RequestMapping("add")
+    @PostMapping("add")
+    @ResponseBody
+    public ResultInfo addUser(User user) {
+        userService.addUser(user);
+        return success("用户添加成功！");
+    }
+        /**
+     * 打开添加或修改用户的页面
+     *
+     *
+
+     * @param
+     * @return java.lang.String
+     */
+    @RequestMapping("toAddOrUpdateUserPage")
+    public String toAddOrUpdateUserPage(Integer id, HttpServletRequest request) {
+
+        // 判断id是否为空，不为空表示更新操作，查询用户对象
+        if (id != null) {
+            // 通过id查询用户对象
+            User user = userService.selectByPrimaryKey(id);
+            // 将数据设置到请求域中
+            request.setAttribute("userInfo",user);
+        }
+
+        return "user/add_update";
+    }
+    @PostMapping("update")
+    @ResponseBody
+    public ResultInfo updateUser(User user) {
+        userService.updateUser(user);
+        return success("用户更新成功！");
+    }
+
+    /**
+     * 用户删除
+     * @param ids
+     * @return com.xxxx.crm.base.ResultInfo
+     */
+    @PostMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteUser(Integer[] ids) {
+
+        userService.deleteByIds(ids);
+
+        return success("用户删除成功！");
+    }
 
 }

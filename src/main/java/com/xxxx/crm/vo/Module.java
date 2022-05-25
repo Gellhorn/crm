@@ -1,7 +1,5 @@
 package com.xxxx.crm.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Module {
@@ -25,10 +23,8 @@ public class Module {
 
     private Byte isValid;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
     public Integer getId() {
