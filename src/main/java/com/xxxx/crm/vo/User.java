@@ -25,6 +25,8 @@ public class User {
 
     private Date updateDate;
 
+    private String roleIds;
+
     public Integer getId() {
         return id;
     }
@@ -95,5 +97,13 @@ public class User {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
     }
 }
