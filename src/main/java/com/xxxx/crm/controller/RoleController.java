@@ -104,7 +104,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     public ResultInfo addGrant(Integer roleId, Integer[] mIds) {
 
-      roleService.addGrant(roleId, mIds);
+       roleService.addGrant(roleId, mIds);
 
         return success("角色授权成功！");
     }
