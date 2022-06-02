@@ -14,7 +14,7 @@ public abstract class BaseService<T,ID> {
 
     @Autowired
     private BaseMapper<T,ID> baseMapper;
-起诉对方
+
     /**
      * 添加记录返回行数
      * @param entity
