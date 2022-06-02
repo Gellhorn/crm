@@ -1,7 +1,10 @@
 package com.xxxx.crm.exceptions;
 
+
 /**
- * 自定义参数异常
+ * 自定义参数异常类
+ *
+ neil
  */
 public class NoLoginException extends RuntimeException {
     private Integer code=300;

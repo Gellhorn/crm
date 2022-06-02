@@ -102,7 +102,7 @@ public class RoleController extends BaseController {
      */
     @PostMapping("addGrant")
     @ResponseBody
-    public ResultInfo addGrant(Integer roleId, Integer[] mIds) {
+    public ResultInfo addGrant(Integer[] mIds,Integer roleId) {
 
        roleService.addGrant(roleId, mIds);
 

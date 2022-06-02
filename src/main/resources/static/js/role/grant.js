@@ -34,10 +34,10 @@ function loadModuleInfo() {
 function  zTreeOnCheck(event, treeId, treeNode) {
     //alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
     var nodes= zTreeObj.getCheckedNodes(true);
-    var mids="mids=";
+    var mids="mIds=";
     for(var i=0;i<nodes.length;i++){
         if(i<nodes.length-1){
-            mids=mids+nodes[i].id+"&mids=";
+            mids=mids+nodes[i].id+"&mIds=";
         }else{
             mids=mids+nodes[i].id;
         }

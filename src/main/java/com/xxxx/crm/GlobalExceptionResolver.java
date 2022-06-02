@@ -2,7 +2,7 @@ package com.xxxx.crm;
 
 import com.alibaba.fastjson.JSON;
 import com.xxxx.crm.base.ResultInfo;
-//import com.xxxx.crm.exceptions.AuthException;
+import com.xxxx.crm.exceptions.AuthException;
 import com.xxxx.crm.exceptions.NoLoginException;
 import com.xxxx.crm.exceptions.ParamsException;
 import org.springframework.stereotype.Component;
@@ -48,7 +48,11 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
          *  判断是否抛出未登录异常
          *      如果抛出该异常，则要求用户登录，重定向跳转到登录页面
          */
-
+        if (ex instanceof NoLoginException) {
+            // 重定向到登录页面
+            ModelAndView mv = new ModelAndView("redirect:/index");
+            return mv;
+        }
 
 
         /**
@@ -67,7 +71,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
             // 获取方法上声明的@ResponseBody注解对象
             ResponseBody responseBody = handlerMethod.getMethod().getDeclaredAnnotation(ResponseBody.class);
 
-            // 判断ResponseBody对象是否为空 Controller有没有@responsebody决定 （如果对象为空，则表示返回的事视图；如果不为空，则表示返回的事数据）
+            // 判断ResponseBody对象是否为空 （如果对象为空，则表示返回的事视图；如果不为空，则表示返回的事数据）
             if (responseBody == null) {
                 /**
                  * 方法返回视图
@@ -79,6 +83,11 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                     modelAndView.addObject("code",p.getCode());
                     modelAndView.addObject("msg",p.getMsg());
 
+                } else if (ex instanceof AuthException) { // 认证异常
+                    AuthException a  = (AuthException) ex;
+                    // 设置异常信息
+                    modelAndView.addObject("code",a.getCode());
+                    modelAndView.addObject("msg",a.getMsg());
                 }
 
                 return modelAndView;
@@ -98,7 +107,12 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
                     resultInfo.setCode(p.getCode());
                     resultInfo.setMsg(p.getMsg());
 
+                } else if (ex instanceof AuthException) { // 认证异常
+                    AuthException a = (AuthException) ex;
+                    resultInfo.setCode(a.getCode());
+                    resultInfo.setMsg(a.getMsg());
                 }
+
                 // 设置响应类型及编码格式（响应JSON格式的数据）
                 response.setContentType("application/json;charset=UTF-8");
                 // 得到字符输出流
