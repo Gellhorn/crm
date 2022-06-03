@@ -1,21 +1,27 @@
 package com.xxxx.crm.controller;
 
 import com.xxxx.crm.base.BaseController;
+import com.xxxx.crm.dao.PermissionMapper;
+import com.xxxx.crm.service.PermissionService;
 import com.xxxx.crm.service.UserService;
 import com.xxxx.crm.utils.CookieUtil;
 import com.xxxx.crm.utils.LoginUserUtil;
 import com.xxxx.crm.vo.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class IndexController extends BaseController {
     @Resource
     private UserService userService;
+    @Resource
+    private PermissionService permissionService;
     /**
      * 系统登录页
      * @return
@@ -35,21 +41,13 @@ public class IndexController extends BaseController {
     /**
      * 后端管理主页面
      * @return
-     * 将user 对象设置到请求阈中
      */
     @RequestMapping("main")
     public String main(HttpServletRequest request){
-      Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
-      if(userId == 0) {
-          try {
-              throw new Exception("未登录");
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
-
-      }
-
-      request.setAttribute("user",userService.selectByPrimaryKey(userId));
-      return "main";
+        Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        request.setAttribute("user",userService.selectByPrimaryKey(userId));
+        List<String> permissions=permissionService.queryUserHasRoleHasPermissionByUserId(userId);
+        request.getSession().setAttribute("permissions",permissions);
+        return "main";
     }
 }
