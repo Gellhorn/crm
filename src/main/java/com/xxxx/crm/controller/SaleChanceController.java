@@ -1,5 +1,6 @@
 package com.xxxx.crm.controller;
 
+import com.xxxx.crm.annoation.RequiredPermission;
 import com.xxxx.crm.base.BaseController;
 import com.xxxx.crm.base.ResultInfo;
 import com.xxxx.crm.enums.StateStatus;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("sale_chance")
+//营销机会数据查询（分页多条件查询） 101001
 public class SaleChanceController extends BaseController {
 
     @Resource
@@ -41,6 +43,7 @@ public class SaleChanceController extends BaseController {
      * @param saleChanceQuery
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
+    @RequiredPermission(code = "101001")
     @RequestMapping("list")
     @ResponseBody
     public Map<String, Object> querySaleChanceByParams(SaleChanceQuery saleChanceQuery,
