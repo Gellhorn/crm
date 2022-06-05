@@ -42,5 +42,101 @@ public class ModuleController extends BaseController {
     public List<TreeModel> queryAllModules(Integer roleId) {
         return moduleService.queryAllModules(roleId);
     }
+
+    @RequestMapping("list")
+    @ResponseBody
+    public Map<String,Object>  queryModuleList() {
+
+        return moduleService.queryModuleList();
+    }
+    /***
+     * 进入资源管理页面
+     *
+     *
+     neil
+     * crm
+     * @param
+     * @return java.lang.String
+     */
+    @RequestMapping("index")
+    public String index() {
+        return "module/module";
+    }
+
+    /**
+     * 添加资源
+     *
+     *
+     neil
+     * crm
+     * @param module
+     * @return com.xxxx.crm.base.ResultInfo
+     */
+    @PostMapping("add")
+    @ResponseBody
+    public ResultInfo addModule(Module module) {
+
+        moduleService.addModule(module);
+        return success("添加资源成功！");
+    }
+    /**
+     * 打开添加资源的页面
+     *
+     *
+     neil
+     * crm
+     * @param grade 层级
+     * @param parentId  父菜单ID
+     * @return java.lang.String
+     */
+    @RequestMapping("toAddModulePage")
+    public String toAddModulePage(Integer grade, Integer parentId, HttpServletRequest request) {
+        // 将数据设置到请求域中
+        request.setAttribute("grade", grade);
+        request.setAttribute("parentId", parentId);
+
+        return "module/add";
+    }
+    @RequestMapping("toUpdateModulePage")
+    public String toUpdateModulePage(Integer id, Model model) {
+        // 将要修改的资源对象设置到请求域中
+        model.addAttribute("module", moduleService.selectByPrimaryKey(id));
+        return "module/update";
+    }
+
+    /**
+     * 删除资源
+     *
+     *
+     neil
+     * crm
+     * @param id
+     * @return com.xxxx.crm.base.ResultInfo
+     */
+    @PostMapping("delete")
+    @ResponseBody
+    public ResultInfo deleteModule(Integer id) {
+
+        moduleService.deleteModule(id);
+        return success("删除资源成功！");
+    }
+    /**
+     * 修改资源
+     *
+     *
+     neil
+     * crm
+     * @param module
+     * @return com.xxxx.crm.base.ResultInfo
+     */
+    @PostMapping("update")
+    @ResponseBody
+    public ResultInfo updateModule(Module module) {
+
+        moduleService.updateModule(module);
+        return success("修改资源成功！");
+    }
+
+
 }
 

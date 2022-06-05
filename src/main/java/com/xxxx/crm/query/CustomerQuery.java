@@ -3,13 +3,12 @@ package com.xxxx.crm.query;
 import com.xxxx.crm.base.BaseQuery;
 
 /**
- * 乐字节：专注线上IT培训
- * 答疑老师微信：lezijie
+ *
  */
 public class CustomerQuery extends BaseQuery {
 
-    private String customerName; // 客户名称
-    private String customerNo; // 客户编号
+    private String cusName; // 客户名称
+    private String cusNo; // 客户编号
     private String level; // 客户级别
 
     private String time; // 订单时间
@@ -17,6 +16,22 @@ public class CustomerQuery extends BaseQuery {
 
     public String getTime() {
         return time;
+    }
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
+
+    public String getCusNo() {
+        return cusNo;
+    }
+
+    public void setCusNo(String cusNo) {
+        this.cusNo = cusNo;
     }
 
     public void setTime(String time) {
@@ -31,21 +46,6 @@ public class CustomerQuery extends BaseQuery {
         this.type = type;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerNo() {
-        return customerNo;
-    }
-
-    public void setCustomerNo(String customerNo) {
-        this.customerNo = customerNo;
-    }
 
     public String getLevel() {
         return level;

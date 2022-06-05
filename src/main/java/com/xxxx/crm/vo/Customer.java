@@ -1,22 +1,19 @@
 package com.xxxx.crm.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Customer {
+    private Integer id;
 
-    private Integer id; // 主键ID
+    private String khno;
 
-    private String khno; // 客户编号
-
-    private String name; // 客户名称
+    private String name;
 
     private String area;
 
     private String cusManager;
 
-    private String level; // 客户级别
+    private String level;
 
     private String myd;
 
@@ -26,7 +23,7 @@ public class Customer {
 
     private String postCode;
 
-    private String phone; // 手机号码
+    private String phone;
 
     private String fax;
 
@@ -34,7 +31,7 @@ public class Customer {
 
     private String yyzzzch;
 
-    private String fr; // 法人代表
+    private String fr;
 
     private String zczj;
 
@@ -48,14 +45,12 @@ public class Customer {
 
     private String gsdjh;
 
-    private Integer state; // 流失状态  0=正常 1=流失
+    private Integer state;
 
     private Integer isValid;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
     public Integer getId() {
