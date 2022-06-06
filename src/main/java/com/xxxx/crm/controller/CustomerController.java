@@ -79,5 +79,21 @@ public class CustomerController extends BaseController {
     public ResultInfo deleteCustomer(Integer id) {
         customerService.deleteCustomer(id);
         return success("修改客户信息成功！");
+    }   /**
+     * 打开客户的订单页面
+     *
+     *
+     neil
+     * crm
+     * @param
+     * @return java.lang.String
+     */
+    @RequestMapping("toCustomerOrderPage")
+    public String toCustomerOrderPage(Integer customerId, Model model) {
+        // 通过客户ID查询客户记录，设置到请求域中
+        model.addAttribute("customer", customerService.selectByPrimaryKey(customerId));
+        return "customer/customer_order";
     }
 }
+
+

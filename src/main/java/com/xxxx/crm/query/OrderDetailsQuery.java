@@ -17,4 +17,6 @@ public class OrderDetailsQuery extends BaseQuery {
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
+
+
 }
