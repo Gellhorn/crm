@@ -337,4 +337,15 @@ public class UserService extends BaseService<User, Integer> {
 //            }
 //        }
     }
+    /**
+     * 查询所有的客户经理
+     *
+     *
+     neil
+
+     * @return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     */
+    public List<Map<String, Object>> queryAllCustomerManagers() {
+        return userMapper.queryAllCustomerManagers();
+    }
 }

@@ -140,4 +140,17 @@ public class UserController extends BaseController {
         return success("用户删除成功！");
     }
 
+    /**
+     * 查询所有的客户经理
+     *
+     *
+
+     * @param
+     * @return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     */
+    @RequestMapping("queryAllCustomerManagers")
+    @ResponseBody
+    public List<Map<String,Object>> queryAllCustomerManagers(){
+        return userService.queryAllCustomerManagers();
+    }
 }
